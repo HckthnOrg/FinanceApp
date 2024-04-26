@@ -5,8 +5,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,16 +22,4 @@ public class User {
     @Column(unique = true, length = 12)
     private String login;
     private String password;
-
-    protected User() {}
-
-    public User(String login, String password) {
-        // validation
-        this.login = login;
-        this.password = password;
-    }
-
-    public String getLogin() {
-        return this.login;
-    }
 }
