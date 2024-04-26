@@ -1,6 +1,9 @@
 package com.example.financeapp.repository.entity;
 
+import java.util.Date;
 import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -9,7 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,22 +24,22 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="accounts")
-public class Account {
+@Table(name="categories")
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
-    
-    @Column(name = "total_spent")
-    private Long totalSpent;
+    @Column(name = "name", unique = true)
+    private String name;
 
-    @Column(name = "transaction_amount")
-    private Long transactionAmount;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "categories")
-    private List<Category> categories;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Transaction> transactions;
+
+    @Column(name = "created_at", updatable = false)
+    @CreationTimestamp
+    private Date createdAt;
 }
