@@ -14,6 +14,11 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env:
+  DATABASE_URL: localhost:5432/testdb
+  DATABASE_USERNAME: postgres
+  DATABASE_PASSWORD: postgres
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,9 +27,9 @@ jobs:
       postgres:
         image: postgres:12
         env:
-          DATABASE_URL: localhost:5432/testdb
-          DATABASE_USERNAME: postgres
-          DATABASE_PASSWORD: postgres
+          POSTGRES_DB: testdb
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
         options: >-
