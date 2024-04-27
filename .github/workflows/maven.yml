@@ -53,7 +53,9 @@ jobs:
 
       - name: Create Test Database
         run: |
-          PGPASSWORD=postgres psql -h localhost -U postgres -c "CREATE DATABASE testdb;"
+          run: |
+            PGPASSWORD=postgres psql -h localhost -U postgres -c "DROP DATABASE IF EXISTS testdb;"
+            PGPASSWORD=postgres psql -h localhost -U postgres -c "CREATE DATABASE testdb;"
 
       - name: Build with Maven
         run: mvn -B package --file pom.xml
