@@ -9,6 +9,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -37,6 +39,11 @@ public class Account {
     @Column(name = "transaction_amount")
     private Long transactionAmount;
 
-    @Column(name = "categories")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "account_categories",
+        joinColumns = @JoinColumn(name = "account_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
     private List<Category> categories;
 }
