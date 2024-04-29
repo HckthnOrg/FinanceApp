@@ -33,11 +33,11 @@ public class Account {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
     
-    @Column(name = "total_spent")
-    private Long totalSpent;
+    @Column(name = "total_spent", columnDefinition = "BIGINT DEFAULT 0")
+    private Long totalSpent = 0L;
 
-    @Column(name = "transaction_amount")
-    private Long transactionAmount;
+    @Column(name = "transaction_amount", columnDefinition = "BIGINT DEFAULT 0")
+    private Long transactionAmount = 0L;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
