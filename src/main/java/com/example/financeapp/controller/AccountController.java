@@ -18,7 +18,6 @@ public class AccountController {
     
     private AccountService accountService;
 
-
     @GetMapping("/{id}")
     public String getAccount(@RequestParam long id) {
         //TODO: list accounts

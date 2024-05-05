@@ -9,7 +9,9 @@ import com.example.financeapp.repository.UserRepository;
 import com.example.financeapp.repository.entity.User;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Service
 public class UserService {
     
@@ -17,11 +19,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final AccountService accountService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AccountService accountService) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.accountService = accountService;
-    }
 
     @Transactional
     public User registerUser(UserRegisterDto userDto) throws UserAlreadyExistException {
