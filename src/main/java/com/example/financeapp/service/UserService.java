@@ -19,7 +19,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final AccountService accountService;
 
-
     @Transactional
     public User registerUser(UserRegisterDto userDto) throws UserAlreadyExistException {
         if (userRepository.findByLogin(userDto.getLogin()) != null) {
