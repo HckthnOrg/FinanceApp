@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class UserRegister {
+public class UserRegisterDto {
 
     @NotBlank
     @Size(min = 5, max = 15, message = "Login length must be between 5 and 15")

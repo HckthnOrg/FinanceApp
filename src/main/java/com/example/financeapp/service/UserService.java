@@ -3,10 +3,9 @@ package com.example.financeapp.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.financeapp.dto.UserRegister;
+import com.example.financeapp.dto.UserRegisterDto;
 import com.example.financeapp.exceptions.UserAlreadyExistException;
 import com.example.financeapp.repository.UserRepository;
-import com.example.financeapp.repository.entity.Account;
 import com.example.financeapp.repository.entity.User;
 
 import jakarta.transaction.Transactional;
@@ -25,7 +24,7 @@ public class UserService {
     }
 
     @Transactional
-    public User registerUser(UserRegister userDto) throws UserAlreadyExistException {
+    public User registerUser(UserRegisterDto userDto) throws UserAlreadyExistException {
         if (userRepository.findByLogin(userDto.getLogin()) != null) {
             throw new UserAlreadyExistException();
         }

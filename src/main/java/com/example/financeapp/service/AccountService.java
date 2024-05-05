@@ -1,5 +1,8 @@
 package com.example.financeapp.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.financeapp.repository.AccountRepository;
@@ -20,5 +23,11 @@ public class AccountService {
         newAccount.setUser(user);
 
         return accountRepository.save(newAccount);
+    }
+
+    public List<Account> getAccountsByUserId() {
+        // TODO: get account by user id
+        List<Account> accountList = new ArrayList<>();
+        return accountList;
     }
 }
