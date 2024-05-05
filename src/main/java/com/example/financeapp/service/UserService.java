@@ -1,20 +1,18 @@
 package com.example.financeapp.service;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
 import com.example.financeapp.dto.UserRegisterDto;
 import com.example.financeapp.exceptions.UserAlreadyExistException;
 import com.example.financeapp.repository.UserRepository;
 import com.example.financeapp.repository.entity.User;
-
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
 public class UserService {
-    
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AccountService accountService;

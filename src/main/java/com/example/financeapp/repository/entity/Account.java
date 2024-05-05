@@ -1,7 +1,5 @@
 package com.example.financeapp.repository.entity;
 
-import java.util.List;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,12 +16,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="accounts")
+@Table(name = "accounts")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,7 +32,7 @@ public class Account {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-    
+
     @Column(name = "total_spent", columnDefinition = "BIGINT DEFAULT 0")
     private Long totalSpent = 0L;
 
@@ -41,9 +41,9 @@ public class Account {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
-        name = "account_categories",
-        joinColumns = @JoinColumn(name = "account_id"),
-        inverseJoinColumns = @JoinColumn(name = "category_id")
+            name = "account_categories",
+            joinColumns = @JoinColumn(name = "account_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private List<Category> categories;
 }
