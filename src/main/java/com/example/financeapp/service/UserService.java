@@ -9,13 +9,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AccountService accountService;
+
+    public User save(User user) {
+        return userRepository.save(user);
+    }
 
     @Transactional
     public User registerUser(UserRegisterDto userDto) throws UserAlreadyExistException {
