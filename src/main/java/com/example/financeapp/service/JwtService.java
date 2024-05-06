@@ -18,6 +18,8 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
+    // TODO: Refactor deprecated methods
+
     @Value("${token.signing.key}}")
     private String jwtSigningKey;
 
