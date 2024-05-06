@@ -1,4 +1,4 @@
-package com.example.financeapp.exceptions;
+package com.example.financeapp.exception;
 
 public class UserAlreadyExistsException extends RuntimeException {
     public UserAlreadyExistsException() {
