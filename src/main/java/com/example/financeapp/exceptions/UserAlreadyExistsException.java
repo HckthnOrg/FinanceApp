@@ -1,7 +1,7 @@
 package com.example.financeapp.exceptions;
 
-public class UserAlreadyExistException extends Exception {
-    public UserAlreadyExistException() {
+public class UserAlreadyExistsException extends Exception {
+    public UserAlreadyExistsException() {
         super("User with this username already exist.");
     }
 }
