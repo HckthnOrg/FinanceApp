@@ -1,6 +1,6 @@
 package com.example.financeapp.repository.entity;
 
-import com.example.financeapp.enums.TransactionType;
+import com.example.financeapp.repository.enums.TransactionType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
