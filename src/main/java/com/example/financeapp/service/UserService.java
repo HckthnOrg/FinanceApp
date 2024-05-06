@@ -1,10 +1,13 @@
 package com.example.financeapp.service;
 
-import com.example.financeapp.exceptions.EmailAlreadyTakenException;
-import com.example.financeapp.exceptions.UserAlreadyExistsException;
+import com.example.financeapp.exception.EmailAlreadyTakenException;
+import com.example.financeapp.exception.UserAlreadyExistsException;
 import com.example.financeapp.repository.UserRepository;
 import com.example.financeapp.repository.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +33,26 @@ public class UserService {
         }
 
         return save(user);
+    }
+
+    public User getByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username not found."));
+    }
+
+    /*
+     * Get user by username.
+     * <p>
+     * Needed for Spring Security.
+     *
+     * @return the user
+     */
+    public UserDetailsService userDetailsService() {
+        return this::getByUsername;
+    }
+
+    public User getCurrentUser() {
+        // Get username from the Spring Security context
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return getByUsername(username);
     }
 }
