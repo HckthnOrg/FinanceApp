@@ -1,11 +1,14 @@
 package com.example.financeapp.service;
 
 import com.example.financeapp.dto.JwtAuthenticationResponse;
+import com.example.financeapp.dto.SignInRequest;
 import com.example.financeapp.dto.SignUpRequest;
 import com.example.financeapp.repository.entity.User;
 import com.example.financeapp.repository.enums.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +29,16 @@ public class AuthenticationService {
                 .build();
 
         userService.create(user);
+
+        String jwt = jwtService.generateToken(user);
+        return new JwtAuthenticationResponse(jwt);
+    }
+
+    public JwtAuthenticationResponse signIn(SignInRequest request) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                request.getUsername(), request.getPassword()));
+
+        UserDetails user = userService.userDetailsService().loadUserByUsername(request.getUsername());
 
         String jwt = jwtService.generateToken(user);
         return new JwtAuthenticationResponse(jwt);
