@@ -1,6 +1,10 @@
+server:
+  port: 8081
+
 spring:
   application:
     name: financeapp
+
   datasource:
     url: jdbc:postgresql://${DATASOURCE_URL}
     username: ${DATASOURCE_USERNAME}
