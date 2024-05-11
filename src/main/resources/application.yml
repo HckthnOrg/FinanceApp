@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: financeapp
+    name: finance_app
 
   datasource:
     url: jdbc:postgresql://${DATASOURCE_URL}
