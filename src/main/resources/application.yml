@@ -2,9 +2,10 @@ spring:
   application:
     name: financeapp
   datasource:
-    url: jdbc:postgresql://${DATABASE_URL}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    url: jdbc:postgresql://${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+
   jpa:
     hibernate:
       ddl-auto: update
