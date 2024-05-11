@@ -27,4 +27,4 @@ spring:
 
 token:
   signing:
-    key: ${SING_IN_KEY}
+    key: ${SIGN_IN_KEY}
