@@ -2,7 +2,7 @@ package com.example.financeapp.controller;
 
 import com.example.financeapp.dto.UserRegisterDto;
 import com.example.financeapp.dto.UserResponseDto;
-import com.example.financeapp.exceptions.UserAlreadyExistException;
+import com.example.financeapp.exception.UserAlreadyExistsException;
 import com.example.financeapp.repository.entity.User;
 import com.example.financeapp.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -18,16 +18,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/user")
 public class UserController {
 
-    private final UserService userService;
-
-    @PostMapping(value = "/create", consumes = "application/json")
-    public ResponseEntity<Object> createUser(@RequestBody UserRegisterDto userDto) {
-        try {
-            User user = userService.registerUser(userDto);
-            UserResponseDto responseDto = new UserResponseDto(user.getId(), user.getLogin(), user.getFirstName(), user.getLastName());
-            return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
-        } catch (UserAlreadyExistException e) {
-            return ResponseEntity.badRequest().body(e.toString());
-        }
-    }
 }
