@@ -1,0 +1,43 @@
+services:
+  client-backend:
+    image: finapp-client:1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8181:8181"
+    depends_on:
+      - service-db
+    environment:
+      SERVER_PORT: 8181
+      SPRING_DATASOURCE_URL: ${DOCKER_COMPOSE_DATASOURCE_URL}
+      SIGN_IN_KEY: ${SIGN_IN_KEY}
+
+
+  service-db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ${DATASOURCE_USERNAME}
+      POSTGRES_PASSWORD: ${DATASOURCE_PASSWORD}
+    ports:
+      - "15432:5432"
+    volumes:
+      - ./infrastructure/db/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql
+      - db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin4_container_finapp
+    image: dpage/pgadmin4:8
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5053:80"
+    volumes:
+        - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  db-data:
+  pgadmin-data:
