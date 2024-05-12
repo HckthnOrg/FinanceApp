@@ -1,4 +1,4 @@
-package com.example.financeapp.dto;
+package com.example.financeapp.domain.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
