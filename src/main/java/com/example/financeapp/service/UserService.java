@@ -1,10 +1,9 @@
 package com.example.financeapp.service;
 
 import com.example.financeapp.domain.entity.User;
-import com.example.financeapp.domain.enums.Role;
-import com.example.financeapp.repository.UserRepository;
 import com.example.financeapp.exception.EmailAlreadyTakenException;
 import com.example.financeapp.exception.UserAlreadyExistsException;
+import com.example.financeapp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
