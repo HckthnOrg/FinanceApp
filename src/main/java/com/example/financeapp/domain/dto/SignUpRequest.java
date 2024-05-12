@@ -20,8 +20,16 @@ public class SignUpRequest {
     @Email(message = "User email should be formated as user@example.com")
     private String email;
 
-    @Schema(description = "password", example = "mySecretPassword12345!")
+    @Schema(description = "Password", example = "mySecretPassword12345!")
     @Size(min = 8, max = 256, message = "Password length must be between 8 and 256")
     @NotBlank(message = "Password is mandatory")
     private String password;
+
+    @Schema(description = "User real first name", example = "Alex")
+    @Size(min = 1, max = 32, message = "User real first name length must be between 1 and 128")
+    private String firstName;
+
+    @Schema(description = "User real second name", example = "Morozov")
+    @Size(min = 1, max = 32, message = "User real second name length must be between 1 and 128")
+    private String secondName;
 }
