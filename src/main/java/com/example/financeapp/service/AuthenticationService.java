@@ -1,10 +1,10 @@
 package com.example.financeapp.service;
 
-import com.example.financeapp.dto.JwtAuthenticationResponse;
-import com.example.financeapp.dto.SignInRequest;
-import com.example.financeapp.dto.SignUpRequest;
-import com.example.financeapp.repository.entity.User;
-import com.example.financeapp.repository.enums.Role;
+import com.example.financeapp.domain.dto.JwtAuthenticationResponse;
+import com.example.financeapp.domain.dto.SignInRequest;
+import com.example.financeapp.domain.dto.SignUpRequest;
+import com.example.financeapp.domain.entity.User;
+import com.example.financeapp.domain.enums.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

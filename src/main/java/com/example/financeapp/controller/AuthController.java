@@ -1,8 +1,8 @@
 package com.example.financeapp.controller;
 
-import com.example.financeapp.dto.JwtAuthenticationResponse;
-import com.example.financeapp.dto.SignInRequest;
-import com.example.financeapp.dto.SignUpRequest;
+import com.example.financeapp.domain.dto.JwtAuthenticationResponse;
+import com.example.financeapp.domain.dto.SignInRequest;
+import com.example.financeapp.domain.dto.SignUpRequest;
 import com.example.financeapp.service.AuthenticationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
