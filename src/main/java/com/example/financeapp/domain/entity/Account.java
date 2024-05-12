@@ -1,4 +1,4 @@
-package com.example.financeapp.repository.entity;
+package com.example.financeapp.domain.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
