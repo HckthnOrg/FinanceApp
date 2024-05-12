@@ -11,7 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>financeapp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>financeapp</name>
+    <name>finance_app</name>
     <description>Finance app for a hackathon</description>
     <properties>
         <java.version>22</java.version>
