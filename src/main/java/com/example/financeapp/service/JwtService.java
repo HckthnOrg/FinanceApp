@@ -1,6 +1,6 @@
 package com.example.financeapp.service;
 
-import com.example.financeapp.repository.entity.User;
+import com.example.financeapp.domain.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

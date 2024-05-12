@@ -1,9 +1,10 @@
 package com.example.financeapp.service;
 
+import com.example.financeapp.domain.entity.User;
+import com.example.financeapp.domain.enums.Role;
+import com.example.financeapp.repository.UserRepository;
 import com.example.financeapp.exception.EmailAlreadyTakenException;
 import com.example.financeapp.exception.UserAlreadyExistsException;
-import com.example.financeapp.repository.UserRepository;
-import com.example.financeapp.repository.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -50,5 +51,17 @@ public class UserService {
         // Get username from the Spring Security context
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return getByUsername(username);
+    }
+
+    /**
+     * Выдача прав администратора текущему пользователю
+     * <p>
+     * Нужен для демонстрации
+     */
+    @Deprecated
+    public void getAdmin() {
+        var user = getCurrentUser();
+        user.setRole(Role.ROLE_ADMIN);
+        save(user);
     }
 }
