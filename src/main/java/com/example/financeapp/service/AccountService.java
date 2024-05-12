@@ -1,8 +1,8 @@
 package com.example.financeapp.service;
 
+import com.example.financeapp.domain.entity.Account;
+import com.example.financeapp.domain.entity.User;
 import com.example.financeapp.repository.AccountRepository;
-import com.example.financeapp.repository.entity.Account;
-import com.example.financeapp.repository.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
