@@ -15,9 +15,10 @@ on:
     branches: [ "master" ]
 
 env:
-  DATABASE_URL: localhost:5432/testdb
-  DATABASE_USERNAME: postgres
-  DATABASE_PASSWORD: postgres
+  DATASOURCE_URL: localhost:5432/testdb
+  DATASOURCE_USERNAME: postgres
+  DATASOURCE_PASSWORD: postgres
+  SIGN_IN_KEY: IHGA37E2G89OVF9KUCW5PQDANQSRT6PKVKXRNAA8TSN3O7JWZPHRBXEBFKTFJ9V0
 
 jobs:
   build:
@@ -40,7 +41,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up JDK 22
         uses: actions/setup-java@v3
         with:
