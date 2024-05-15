@@ -44,7 +44,7 @@ public class SecurityConfig {
     }
 
     private void configureCors(CorsConfigurer<HttpSecurity> cors) {
-        cors.configurationSource(request -> {
+        cors.configurationSource(_ -> {
             CorsConfiguration corsConfig = new CorsConfiguration();
             corsConfig.setAllowedOrigins(List.of("*"));
             corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
