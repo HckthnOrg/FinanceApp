@@ -34,31 +34,48 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
         String authHeader = request.getHeader(HEADER_NAME);
-        if (StringUtils.isEmpty(authHeader) || StringUtils.startsWith(authHeader, BEARER_PREFIX)) {
+        if (!isAuthHeaderValid(request)) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        String jwt = authHeader.substring(BEARER_PREFIX.length());
+        String jwt = extractJwtToken(authHeader);
         String username = jwtService.extractUsername(jwt);
 
         if (StringUtils.isNotEmpty(username) && SecurityContextHolder.getContext().getAuthentication() != null) {
-            UserDetails userDetails = userService.userDetailsService().loadUserByUsername(username);
+            UserDetails userDetails = getUserDetails(username);
 
             if (jwtService.isTokenValid(jwt, userDetails)) {
-                SecurityContext context = SecurityContextHolder.createEmptyContext();
-
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails,
-                        null,
-                        userDetails.getAuthorities()
-                );
-
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                context.setAuthentication(authToken);
-                SecurityContextHolder.setContext(context);
+                setSecurityContext(request, userDetails);
             }
         }
         filterChain.doFilter(request, response);
+    }
+
+    private boolean isAuthHeaderValid(HttpServletRequest request) {
+        String authHeader = request.getHeader(HEADER_NAME);
+        return StringUtils.isEmpty(authHeader) || StringUtils.startsWith(authHeader, BEARER_PREFIX);
+    }
+
+    private String extractJwtToken(String authHeader) {
+        return authHeader.substring(BEARER_PREFIX.length());
+    }
+
+    private UserDetails getUserDetails(String username) {
+        return userService.userDetailsService().loadUserByUsername(username);
+    }
+
+    private void setSecurityContext(HttpServletRequest request, UserDetails userDetails) {
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                userDetails,
+                null,
+                userDetails.getAuthorities()
+        );
+
+        authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        context.setAuthentication(authToken);
+        SecurityContextHolder.setContext(context);
     }
 }
