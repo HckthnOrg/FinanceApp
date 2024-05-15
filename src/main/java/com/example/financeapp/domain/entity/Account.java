@@ -7,15 +7,18 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -26,24 +29,24 @@ import java.util.List;
 @Table(name = "accounts")
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "total_spent", columnDefinition = "BIGINT DEFAULT 0")
-    private Long totalSpent = 0L;
+    @Column(name = "total_spent")
+    private Long totalSpent;
 
-    @Column(name = "transaction_amount", columnDefinition = "BIGINT DEFAULT 0")
-    private Long transactionAmount = 0L;
+    @Column(name = "transaction_amount")
+    private Long transactionAmount;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "account_categories",
-            joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at", updatable = false)
+    private Date createdAt;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Category> categories;
 }
