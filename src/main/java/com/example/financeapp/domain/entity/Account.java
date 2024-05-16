@@ -36,8 +36,8 @@ public class Account {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "total_spent")
-    private Long totalSpent;
+    @Column(name = "balance")
+    private Long balance;
 
     @Column(name = "transaction_amount")
     private Long transactionAmount;
