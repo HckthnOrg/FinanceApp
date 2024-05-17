@@ -1,11 +1,6 @@
-package com.example.financeapp.repository.entity;
+package com.example.financeapp.domain.entity;
 
-import java.util.Date;
-
-import org.hibernate.annotations.CreationTimestamp;
-
-import com.example.financeapp.enums.TransactionType;
-
+import com.example.financeapp.domain.enums.TransactionType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -20,6 +15,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.util.Date;
 
 @Entity
 @Getter

@@ -1,37 +1,54 @@
 package com.example.financeapp.service;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.example.financeapp.domain.entity.User;
+import com.example.financeapp.exception.EmailAlreadyTakenException;
+import com.example.financeapp.exception.UserAlreadyExistsException;
+import com.example.financeapp.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.example.financeapp.dto.UserRegisterDto;
-import com.example.financeapp.exceptions.UserAlreadyExistException;
-import com.example.financeapp.repository.UserRepository;
-import com.example.financeapp.repository.entity.User;
-
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class UserService {
-    
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final AccountService accountService;
 
-    @Transactional
-    public User registerUser(UserRegisterDto userDto) throws UserAlreadyExistException {
-        if (userRepository.findByLogin(userDto.getLogin()) != null) {
-            throw new UserAlreadyExistException();
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    public User create(User user) {
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new UserAlreadyExistsException();
         }
 
-        User newUser = new User();
-        newUser.setLogin(userDto.getLogin());
-        newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        newUser.setFirstName(userDto.getFirstName());
-        newUser.setLastName(userDto.getLastName());
-        newUser.setAccount(accountService.createAccount(newUser));
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new EmailAlreadyTakenException();
+        }
 
-        return userRepository.save(newUser);
+        return save(user);
+    }
+
+    public User getByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username not found."));
+    }
+
+    /*
+     * Get user by username.
+     * <p>
+     * Needed for Spring Security.
+     *
+     * @return the user
+     */
+    public UserDetailsService userDetailsService() {
+        return this::getByUsername;
+    }
+
+    public User getCurrentUser() {
+        // Get username from the Spring Security context
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return getByUsername(username);
     }
 }

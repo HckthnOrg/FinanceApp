@@ -1,15 +1,13 @@
 package com.example.financeapp.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.example.financeapp.domain.entity.Account;
+import com.example.financeapp.domain.entity.User;
+import com.example.financeapp.repository.AccountRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.example.financeapp.repository.AccountRepository;
-import com.example.financeapp.repository.entity.Account;
-import com.example.financeapp.repository.entity.User;
-
-import lombok.RequiredArgsConstructor;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +24,6 @@ public class AccountService {
 
     public List<Account> getAccountsByUserId() {
         // TODO: get account by user id
-        List<Account> accountList = new ArrayList<>();
-        return accountList;
+        return new ArrayList<>();
     }
 }

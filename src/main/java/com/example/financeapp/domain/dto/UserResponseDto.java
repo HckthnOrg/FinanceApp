@@ -1,4 +1,4 @@
-package com.example.financeapp.dto;
+package com.example.financeapp.domain.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
