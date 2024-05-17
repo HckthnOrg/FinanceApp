@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "Categories")
-@RequestMapping("/api/categories")
+@RequestMapping("/api/v1/categories")
 public class CategoryController {
     private final CategoryService categoryService;
 
@@ -36,19 +36,19 @@ public class CategoryController {
         return categoryService.getCategory(categoryId);
     }
 
-    @PostMapping("/create")
+    @PostMapping
     @Operation(summary = "Create a new category")
     public CategoryDTO createCategory(@RequestBody @Valid CategoryDTO categoryDTO) {
         return categoryService.createCategory(categoryDTO);
     }
 
-    @PutMapping("/{categoryId}/update")
+    @PutMapping("/{categoryId}")
     @Operation(summary = "Update an existing category")
     public CategoryDTO updateCategory(@RequestBody @Valid CategoryDTO categoryDTO, @PathVariable Long categoryId) {
         return categoryService.updateCategory(categoryId, categoryDTO);
     }
 
-    @DeleteMapping("/{categoryId}/delete")
+    @DeleteMapping("/{categoryId}")
     @Operation(summary = "Delete a category by its ID")
     public void deleteCategory(@PathVariable Long categoryId) {
         categoryService.deleteCategory(categoryId);
