@@ -1,6 +1,7 @@
 package com.example.financeapp.domain.entity;
 
 import com.example.financeapp.domain.enums.Role;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -8,6 +9,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -50,16 +52,15 @@ public class User implements UserDetails {
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "second_name", nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private Role role;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "account_id", referencedColumnName = "id")
-//    private Account account;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Account account;
 
     @Column(name = "created_at", updatable = false)
     @CreationTimestamp

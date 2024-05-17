@@ -1,23 +1,24 @@
 package com.example.financeapp.controller;
 
+import com.example.financeapp.domain.dto.AccountDTO;
 import com.example.financeapp.service.AccountService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@Tag(name = "Account")
 @RequiredArgsConstructor
-@Controller
-@RequestMapping("/api/account")
+@RequestMapping("/api/v1/accounts")
 public class AccountController {
+    private final AccountService accountService;
 
-    private AccountService accountService;
-
-    @GetMapping("/{id}")
-    public String getAccount(@RequestParam long id) {
-        //TODO: list accounts
-
-        return "";
+    @GetMapping
+    @Operation(summary = "Get user account")
+    public AccountDTO getAccount() {
+        return accountService.getUserAccount();
     }
 }

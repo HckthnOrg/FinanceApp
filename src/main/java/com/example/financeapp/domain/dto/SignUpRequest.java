@@ -29,7 +29,7 @@ public class SignUpRequest {
     @Size(min = 1, max = 32, message = "User real first name length must be between 1 and 128")
     private String firstName;
 
-    @Schema(description = "User real second name", example = "Morozov")
+    @Schema(description = "User real last name", example = "Morozov")
     @Size(min = 1, max = 32, message = "User real second name length must be between 1 and 128")
-    private String secondName;
+    private String lastName;
 }

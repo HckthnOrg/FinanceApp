@@ -1,5 +1,6 @@
 package com.example.financeapp.service;
 
+import com.example.financeapp.domain.entity.Account;
 import com.example.financeapp.domain.entity.User;
 import com.example.financeapp.exception.EmailAlreadyTakenException;
 import com.example.financeapp.exception.UserAlreadyExistsException;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final AccountService accountService;
 
     public User save(User user) {
         return userRepository.save(user);
@@ -27,6 +29,11 @@ public class UserService {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new EmailAlreadyTakenException();
         }
+
+        Account account = new Account();
+        account.setUser(user);
+        accountService.configureAccount(account);
+        user.setAccount(account);
 
         return save(user);
     }
