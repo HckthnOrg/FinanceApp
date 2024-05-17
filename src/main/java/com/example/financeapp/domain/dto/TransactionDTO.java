@@ -12,10 +12,6 @@ import java.util.Date;
 @Schema(name = "TransactionDTO", description = "DTO for Transaction entity")
 public class TransactionDTO {
     @NotNull
-    @Schema(description = "Transaction ID", example = "1")
-    private Long id;
-
-    @NotNull
     @Schema(description = "Value of the transaction", example = "1000")
     private Long value;
 
