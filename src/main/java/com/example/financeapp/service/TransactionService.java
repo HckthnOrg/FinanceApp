@@ -1,10 +1,7 @@
 package com.example.financeapp.service;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
-import com.example.financeapp.domain.dto.CategoryDTO;
 import com.example.financeapp.domain.dto.RequestTransactionDTO;
 import com.example.financeapp.domain.dto.ResponseTransactionDTO;
 import com.example.financeapp.domain.entity.Category;
