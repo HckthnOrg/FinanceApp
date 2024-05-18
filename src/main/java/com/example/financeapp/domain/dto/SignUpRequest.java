@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @Schema(description = "Request for sign up")
 public class SignUpRequest {
-    @Schema(description = "User name", example = "Jhon")
+    @Schema(description = "User name", example = "johndoe")
     @Size(min = 5, max = 32, message = "Username length must be between 5 and 32")
     @NotBlank(message = "Username is mandatory")
     private String username;
@@ -25,11 +25,11 @@ public class SignUpRequest {
     @NotBlank(message = "Password is mandatory")
     private String password;
 
-    @Schema(description = "User real first name", example = "Alex")
+    @Schema(description = "User real first name", example = "John")
     @Size(min = 1, max = 32, message = "User real first name length must be between 1 and 128")
     private String firstName;
 
-    @Schema(description = "User real second name", example = "Morozov")
+    @Schema(description = "User real last name", example = "Doe")
     @Size(min = 1, max = 32, message = "User real second name length must be between 1 and 128")
-    private String secondName;
+    private String lastName;
 }

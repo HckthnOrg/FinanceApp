@@ -1,5 +1,6 @@
 package com.example.financeapp.exception.handler;
 
+import com.example.financeapp.exception.CategoryNotFoundException;
 import com.example.financeapp.exception.EmailAlreadyTakenException;
 import com.example.financeapp.exception.UserAlreadyExistsException;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,12 @@ public class ExceptionGlobalHandler {
     public ResponseEntity<String> handleUserAlreadyExistsException(UserAlreadyExistsException e) {
         log.error("UserAlreadyExistsException occurred: {}", e.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+    }
+
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<String> handleCategoryNotFoundException(CategoryNotFoundException e) {
+        log.error("CategoryNotFoundException occurred: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
