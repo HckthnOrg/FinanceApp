@@ -58,6 +58,10 @@ public class UserService {
         return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username not found."));
     }
 
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
+
     /*
      * Get user by username.
      * <p>
