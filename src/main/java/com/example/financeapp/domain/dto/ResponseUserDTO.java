@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.example.financeapp.domain.entity.Account;
 import com.example.financeapp.domain.enums.Role;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
@@ -11,10 +12,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "DTO representing a user")
 public class ResponseUserDTO {
@@ -48,6 +47,7 @@ public class ResponseUserDTO {
     private Account account;
 
     @NotNull
-    @Schema(description = "The creation timestamp of the user", example = "2024-01-01T12:00:00")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+    @Schema(description = "The creation timestamp of the user", example = "2024-01-01T12:00:00.000+0000")
     private Date createdAt;
 }

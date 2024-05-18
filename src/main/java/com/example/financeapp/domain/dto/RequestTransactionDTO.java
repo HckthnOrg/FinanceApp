@@ -23,11 +23,12 @@ public class RequestTransactionDTO {
     private String description;
 
     @NotNull
-    @Schema(description = "Category of the transaction")
-    private String categoryName;
+    @Schema(description = "Category ID of the transaction", example = "1")
+    private Long categoryId;
 
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Schema(description = "Date of the transaction", example = "2024-05-16")
     private Date date;
 }
+
