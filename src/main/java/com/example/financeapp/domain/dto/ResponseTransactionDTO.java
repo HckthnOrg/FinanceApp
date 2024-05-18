@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Data
 @Schema(name = "TransactionDTO", description = "DTO for Transaction entity")
-public class TransactionDTO {
+public class ResponseTransactionDTO {
     @NotNull
     @Schema(description = "Value of the transaction", example = "1000")
     private Long value;
@@ -30,4 +30,6 @@ public class TransactionDTO {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Schema(description = "Date of the transaction", example = "2024-05-16")
     private Date date;
+
+    
 }
