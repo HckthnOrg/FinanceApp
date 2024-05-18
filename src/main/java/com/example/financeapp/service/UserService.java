@@ -1,9 +1,11 @@
 package com.example.financeapp.service;
 
+import com.example.financeapp.domain.dto.ResponseUserDTO;
 import com.example.financeapp.domain.entity.Account;
 import com.example.financeapp.domain.entity.User;
 import com.example.financeapp.exception.EmailAlreadyTakenException;
 import com.example.financeapp.exception.UserAlreadyExistsException;
+import com.example.financeapp.exception.UserIdNotFoundException;
 import com.example.financeapp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -36,6 +38,20 @@ public class UserService {
         user.setAccount(account);
 
         return save(user);
+    }
+
+    public ResponseUserDTO getById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserIdNotFoundException(id));
+        return new ResponseUserDTO(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getRole(),
+                user.getAccount(),
+                user.getCreatedAt()
+        );
     }
 
     public User getByUsername(String username) {
